@@ -1,0 +1,67 @@
+<html>
+<head>
+	<title></title>
+
+<script type='text/javascript'>
+	var Nuri_Path = function(){
+		this.path  = null;
+		this.hello = null;
+		this.content = "home  ";	
+	};
+
+	Nuri_Path.prototype.init = function() {
+		this.path = document.getElementsByName("target")[0].value.split('>') ;
+		this.hello = document.getElementById("hello"); 
+		return (function(obj){
+			var nuri = obj;
+			nuri.make();
+			nuri.attach();		
+		})(this);
+	};
+
+	Nuri_Path.prototype.make = function() {
+		for(var i=0;i<this.path.length;i++){
+			this.addEvent(i, this.path[i]);
+		}
+	}
+
+	Nuri_Path.prototype.addEvent = function(arg, arg1) {
+		this.append('> <a href="#"'); 
+		this.append('	class="link" ');
+		this.append('	onclick="goMenu('+arg+');"');
+		this.append('	onblur="this.blur();">');
+		this.append(''+arg1+'</a> ');	
+	}
+
+	Nuri_Path.prototype.append = function(str){
+		this.content += str ;
+	};
+
+	Nuri_Path.prototype.attach = function() {
+		this.hello.innerHTML = this.content;	
+	}
+
+	function goMenu(arg){
+		alert(arg);
+	}
+
+	window.onload = function(){
+		var nuri = new Nuri_Path();
+		nuri.init();
+	};
+
+</script>
+<style type="text/css">
+	.link{cursor:hand;}
+	.link:link{text-decoration: none;}
+</style>
+</head>
+<body>
+<div id="wrapper">	
+	<div id="hello"></div>
+
+	</div>
+	<input type="hidden" name="target" value="쇼핑/전자 > 전자 > 컴퓨터">
+</body>
+</html>
+
